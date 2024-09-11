@@ -4,6 +4,9 @@ import { z } from 'zod'
 import logo from "../../assets/logo.svg"
 import bgImage from "../../assets/bg.png"
 import { zodResolver } from "@hookform/resolvers/zod";
+import { useContext, useState } from "react";
+import { AuthContext } from "../../contexts/Auth/AuthContext";
+import { useNavigate } from "react-router-dom";
 
 const LoginFormSchema = z.object({
   email: z.string()
@@ -16,14 +19,33 @@ const LoginFormSchema = z.object({
 type LoginFormValidSchema = z.infer<typeof LoginFormSchema>
 
 export function LoginForm(){
-  
+  const [email, setEmail] = useState("")
+  const [password, setPassword] = useState("")
+
+  const auth = useContext(AuthContext)
+  const navigate = useNavigate()
+
   const { register, handleSubmit } = useForm<LoginFormValidSchema>({
     resolver: zodResolver(LoginFormSchema),
   });
 
-  const onSubmit = (data:LoginFormValidSchema) => console.log(data);
 
+  const handleLogin = async () => {
+    if(email && password) {
+      const isLogged = await auth.signIn(email, password)
+      if(isLogged) {
+        navigate("/paginainicial")
+      } else {
+        alert("Dados digitádos são inválidos")
+      }
+    }
+  }
+
+  const onSubmit = () => handleLogin();
+
+  
   return (
+    
     <LoginContainer>
       <FormTitle>
         <div >
@@ -37,13 +59,24 @@ export function LoginForm(){
           <div className="userInformations">
             <div className="email">
               <label>E-mail</label>
-              <input {...register("email")} placeholder="Digite seu e-mail"/>
+              <input 
+                {...register("email")}
+                placeholder="Digite seu e-mail"
+                value={email}
+                onChange={e => setEmail(e.target.value)}
+              />
               
             </div>
             <div className="password">
               <label>Senha</label>
               <a href="#">Esqueceu a senha?</a>
-              <input {...register("password")} placeholder="Digite sua senha" type="password"/>
+              <input
+                {...register("password")}
+                placeholder="Digite sua senha"
+                type="password"
+                value={password}
+                onChange={e => setPassword(e.target.value)}
+              />
               
             </div>
           </div>
