@@ -12,7 +12,19 @@ export const LoginContainer = styled.div `
     object-fit: cover;
   }
 
-  
+  @media (max-width: 1120px) {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 1rem;
+    
+    .bgImage {
+      display: none;
+      visibility: hidden;
+    }
+
+
+  }
 
 
 `
@@ -43,6 +55,12 @@ export const FormTitle = styled.main `
     margin-top: 2rem;
   }
 
+
+  @media (max-width: 1120px) {
+    margin-left: 0;
+
+    
+  }
 `
 
 export const Form = styled.form `
