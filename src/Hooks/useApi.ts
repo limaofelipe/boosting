@@ -4,6 +4,8 @@ const api = axios.create({
   baseURL: import.meta.env.VITE_APP_API
 })
 
+
+
 export const useApi = () => ({
   validateToken: async (token:string) => {
     return {
@@ -13,13 +15,13 @@ export const useApi = () => ({
     return response.data;
   },
 
-  signIn: async(email: string, password: string) => {
+  signIn: async (email: string, password: string) => {
     return {
       user: {id: 1, name: "Felipe", email: "felipe@gmail.com"},
       token: "112341"
     }
     const response = await api.post("/signin", {email, password})
-    return response.data;
+    return response.data; 
   },
 
   logout: async () => {

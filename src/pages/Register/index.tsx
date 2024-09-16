@@ -8,7 +8,6 @@ import { useContext, useState } from "react";
 import { AuthContext } from "../../contexts/Auth/AuthContext";
 import { Link, useNavigate } from "react-router-dom";
 
-
 const LoginFormSchema = z.object({
   email: z.string()
     .min(1, "Digite um e-mail válido.")
@@ -19,11 +18,10 @@ const LoginFormSchema = z.object({
 
 type LoginFormValidSchema = z.infer<typeof LoginFormSchema>
 
-export function LoginForm(){
+export function RegisterForm(){
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
 
-  
   const auth = useContext(AuthContext)
   const navigate = useNavigate()
 
@@ -41,7 +39,6 @@ export function LoginForm(){
         alert("Dados digitádos são inválidos")
       }
     }
-    
   }
 
   const onSubmit = () => handleLogin();
@@ -56,15 +53,15 @@ export function LoginForm(){
         </div>
 
         <Form onSubmit={handleSubmit(onSubmit)}>
-            <h1>Acesse a Plataforma</h1>
-            <p>Faça login ou registre-se para começar a acompanhar seus alunos a partir de hoje.</p>
+            <h1>Inscreva-se aqui</h1>
+            <p>Registre-se para começar a acompanhar seus alunos a partir de hoje.</p>
 
           <div className="userInformations">
             <div className="email">
               <label>E-mail</label>
               <input 
                 {...register("email")}
-                placeholder="Digite seu e-mail"
+                placeholder="Digite seu melhor e-mail"
                 value={email}
                 onChange={e => setEmail(e.target.value)}
               />
@@ -72,7 +69,6 @@ export function LoginForm(){
             </div>
             <div className="password">
               <label>Senha</label>
-              <a href="#">Esqueceu a senha?</a>
               <input
                 {...register("password")}
                 placeholder="Digite sua senha"
@@ -85,8 +81,8 @@ export function LoginForm(){
           </div>
 
           <div>
-            <button type="submit">Entrar</button>
-            <p>Ainda não tem uma conta?<Link to="/registrar"> Inscreva-se</Link></p>
+            <button type="submit">Registrar</button>
+            <p>Já possui uma conta?<Link to="/login"> Faça Login</Link></p>
           </div>
         </Form>
       </FormTitle>
