@@ -57,7 +57,7 @@ export function LoginForm(){
 
         <Form onSubmit={handleSubmit(onSubmit)}>
             <h1>Acesse a Plataforma</h1>
-            <p>Faça login ou registre-se para começar a acompanhar seus alunos a partir de hoje.</p>
+            <p>Faça login ou registre-se para começar a acompanhar seus alunos a partir de hoje</p>
 
           <div className="userInformations">
             <div className="email">
